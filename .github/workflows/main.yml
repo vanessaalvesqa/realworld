@@ -1,0 +1,34 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Cypress tests
+        run: npm run cy:run -- --headless --browser chrome
+
+      - name: Generate test reports directory
+        run: mkdir -p test-results
+
+      - name: Copy test reports
+        run: cp -r reports/* test-results/ || echo "No test reports to copy"
+
+      - name: Upload test reports
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: test-results
