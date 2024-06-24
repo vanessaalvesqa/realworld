@@ -9,7 +9,7 @@ Feature: Create New Article
     When I enter "<tags>" into the tags field
     When I click the publish article button
     Then I should be redirected to the article page
-    Then I should see "<title>" as the title
+    And I should see "<title>" as the title
 
     Examples:
       | title             | description                 | body                                | tags            |

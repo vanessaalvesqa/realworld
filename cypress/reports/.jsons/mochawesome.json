@@ -40,7 +40,7 @@
               "timedOut": null,
               "duration": 10954,
               "state": "passed",
-              "speed": "slow",
+              "speed": "medium",
               "pass": true,
               "fail": false,
               "pending": false,
