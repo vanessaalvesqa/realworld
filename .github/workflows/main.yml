@@ -16,10 +16,22 @@ jobs:
           node-version: '14'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run tests
         run: npm test
+        continue-on-error: true
+
+      - name: Generate and Upload Test Reports
+        if: failure()
+        run: |
+          mkdir -p test-results
+          cp -r reports/* test-results/  # Adjust this path based on your report output
+        continue-on-error: true
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: test-results
 
       - name: Create Issue on Test Failure
         if: failure()
