@@ -8,8 +8,8 @@ To get started, follow these steps:
 
 1. **Clone the repository and follow the commands:**
    ```bash
-   git clone https://github.com/yourusername/realworld-cypress.git
-   cd realworld-cypress
+   git clone https://github.com/yourusername/realworld.git
+   cd realworld
    npm install
    npm install cypress@10.11.0 --save-dev
 
