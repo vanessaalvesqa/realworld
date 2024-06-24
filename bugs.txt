@@ -1,0 +1,38 @@
+THESE BUGS WERE HAPPENING WHEN I WAS BUILDING THE AUTOMATION, BUT SEEMS THEY'RE NOT HAPPENING ANYMORE.
+
+1:
+Title: Post Comment is not working, returns 401 Unauthorized
+
+Steps to Reproduce:
+
+1-Go to Vue Vuex RealWorld application (https://vue-vuex-realworld.netlify.app/#/).
+2-Log in using valid credentials.
+3-Go to any article.
+4-Write a comment on the article.
+
+Expected Result:
+
+The comment should be posted and displayed under the article.
+
+Actual Result:
+
+The comment is not posted and a 401 Unauthorized error is returned.
+
+2: 
+Title: Post an article is not working, returns 401 Unauthorized
+
+Steps to Reproduce:
+
+1-Go to Vue Vuex RealWorld application (https://vue-vuex-realworld.netlify.app/#/).
+2-Log in using valid credentials.
+3-Go to "New Article" section.
+4-Fill in the article details.
+5-Click on "Publish Article".
+
+Expected Result:
+
+The article should be successfully posted and visible. 
+
+Actual Result:
+
+The article is not posted and a 401 Unauthorized error is returned.

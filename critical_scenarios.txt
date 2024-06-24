@@ -1,0 +1,39 @@
+1. Sign Up and Sign In
+Sign Up and Sign In are crucial because it's the entry point for any user interaction within the 
+application. 
+
+Test Cases:
+
+Sign Up:
+Valid user registration.
+Duplicate email.
+Invalid email format.
+
+Sign In:
+Login with correct credentials.
+Incorrect email.
+Incorrect password.
+
+2. Article Management (Create, Read)
+Article management is the main functionality of the application, allowing users to create content,
+engage the application
+
+Test Cases:
+
+Successful Create Article 
+Missing title.
+Missing content.
+View a list of articles.
+View a single article.
+
+3.Interaction with Articles
+Commenting provides engagement on the application
+
+Test Cases:
+
+Successful Commenting
+Empty comment submission.
+View comments.
+
+These test cases cover essential functionality to ensure these flows continue 
+function correctly, providing a great user experience.
