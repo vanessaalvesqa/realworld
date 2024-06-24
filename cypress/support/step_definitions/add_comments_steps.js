@@ -17,7 +17,7 @@ Given('I am logged in', () => {
 });
 
 Given('I am on the article page for {string}', (title) => {
-  articlePage.visit(); 
+  articlePage.visit();
   cy.contains(title).click();
   cy.contains(title).should('be.visible');
 });
