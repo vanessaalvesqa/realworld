@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:  # Add this line to enable manual triggering
+  workflow_dispatch:  # Manual triggering via GitHub Actions UI
 
 jobs:
   build:
@@ -46,7 +46,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { context, getOctokit } = require('@actions/github');
+            const { github, getOctokit } = require('@actions/github');
             const octokit = getOctokit('${{ secrets.GITHUB_TOKEN }}');
             const issueTitle = 'CI Test Failure';
             const issueBody = `
@@ -62,8 +62,8 @@ jobs:
             `;
 
             await octokit.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
+              owner: github.context.repo.owner,
+              repo: github.context.repo.repo,
               title: issueTitle,
               body: issueBody,
             });
