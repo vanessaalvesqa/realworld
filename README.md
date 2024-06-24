@@ -11,6 +11,7 @@ To get started, follow these steps:
    git clone https://github.com/yourusername/realworld-cypress.git
    cd realworld-cypress
    npm install
+   npm install cypress@10.11.0 --save-dev
 
 
 ### Running the Tests
