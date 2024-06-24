@@ -21,29 +21,14 @@ jobs:
       - name: Run Cypress tests
         run: npm run cy:run -- --headless --browser chrome
 
-      - name: Create Issue on Test Failure
-        if: failure()
-        uses: actions/github-script@v6
+      - name: Generate test reports directory
+        run: mkdir -p test-results
+
+      - name: Copy test reports
+        run: cp -r reports/* test-results/ || echo "No test reports to copy"
+
+      - name: Upload test reports
+        uses: actions/upload-artifact@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { getOctokit, context } = require('@actions/github');
-            const octokit = getOctokit(process.env.GITHUB_TOKEN);
-            const issueTitle = 'CI Test Failure';
-            const issueBody = `
-              ## CI Test Failure Report
-              The CI run for commit ${context.sha} failed.
-              **Branch:** ${context.ref}
-              **Workflow:** ${context.workflow}
-              **Job:** ${context.job}
-              **Run Number:** ${context.runNumber}
-              **Run ID:** ${context.runId}
-              
-              Check the [Actions tab](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}) for more details.
-            `;
-            await octokit.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: issueTitle,
-              body: issueBody,
-            });
+          name: test-results
+          path: test-results
