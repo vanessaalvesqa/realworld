@@ -16,7 +16,7 @@ To get started, follow these steps:
 
 2.**Running and testing:**
 ```bash
-npx cypress install
+npm install cypress@10.11.0
 
 ### Running the Tests
 
