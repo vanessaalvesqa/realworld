@@ -1,0 +1,69 @@
+name: Main
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:  # Add this line to enable manual triggering
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Cypress tests
+        run: npm run cy:run -- --headless --browser chrome
+
+      - name: Generate and upload test report
+        run: |
+          mkdir -p reports
+          npm run cy:run -- --headless --browser chrome --reporter mochawesome --reporter-options "reportDir=reports,reportFilename=report"
+        continue-on-error: true
+
+      - name: Upload report
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-report
+          path: reports/
+
+      - name: Create GitHub issue on failure
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { context, getOctokit } = require('@actions/github');
+            const octokit = getOctokit('${{ secrets.GITHUB_TOKEN }}');
+            const issueTitle = 'CI Test Failure';
+            const issueBody = `
+            ## CI Test Failure Report
+            The CI run for commit \`${{ github.sha }}\` failed.
+            **Branch:** \`${{ github.ref }}\`
+            **Workflow:** \`${{ github.workflow }}\`
+            **Job:** \`${{ github.job }}\`
+            **Run Number:** \`${{ github.run_number }}\`
+            **Run ID:** \`${{ github.run_id }}\`
+
+            Check the [Actions tab](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for more details.
+            `;
+
+            await octokit.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: issueTitle,
+              body: issueBody,
+            });
