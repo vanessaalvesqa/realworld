@@ -1,6 +1,12 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -20,7 +26,7 @@ jobs:
 
       - name: Run tests
         run: npm test
-        continue-on-error: true
+        continue-on-error: true  # Ensure the next step runs even if tests fail
 
       - name: Generate test reports directory
         if: failure()
@@ -28,7 +34,7 @@ jobs:
 
       - name: Copy test reports
         if: failure()
-        run: cp -r reports/* test-results/
+        run: cp -r reports/* test-results/  # Adjust this path based on your report output
 
       - name: Upload test reports
         if: failure()
@@ -43,7 +49,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { getOctokit, context } = require('@actions/github');
+            const { getOctokit } = require('@actions/github');
             const octokit = getOctokit(process.env.GITHUB_TOKEN);
             const issueTitle = 'CI Test Failure';
             const issueBody = `
