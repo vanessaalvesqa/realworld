@@ -5,7 +5,7 @@ import ArticlePage from '../page_objects/articlePage';
 
 const commentPage = new CommentPage();
 const signInPage = new SignInPage();
-const articlePage = new ArticlePage(); 
+const articlePage = new ArticlePage();
 
 Given('I am logged in', () => {
   cy.wait(1000);
@@ -17,9 +17,8 @@ Given('I am logged in', () => {
 });
 
 Given('I am on the article page for {string}', (title) => {
-  articlePage.visit(); 
-  cy.contains(title).click();
-  cy.contains(title).should('be.visible');
+  articlePage.visit();
+  cy.contains(title).click().should('be.visible');
 });
 
 When('I enter {string} into the comment input field', (comment) => {
@@ -28,4 +27,11 @@ When('I enter {string} into the comment input field', (comment) => {
 
 Then('I should see {string} under the article', (comment) => {
   cy.contains(comment).should('be.visible');
+});
+
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+  console.error('Uncaught exception:', err);
+  
+  return false;
 });

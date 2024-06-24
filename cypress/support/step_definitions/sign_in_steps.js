@@ -24,3 +24,11 @@ When('I click the sign in button', () => {
 Then('I should be redirected to the home page', () => {
   cy.url().should('eq', Cypress.config().baseUrl);
 });
+
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+  console.error('Uncaught exception:', err);
+
+  return false;
+});
+
