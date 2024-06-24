@@ -22,12 +22,16 @@ jobs:
         run: npm test
         continue-on-error: true
 
-      - name: Generate and Upload Test Reports
+      - name: Generate test reports directory
         if: failure()
-        run: |
-          mkdir -p test-results
-          cp -r reports/* test-results/  # Adjust this path based on your report output
-        continue-on-error: true
+        run: mkdir -p test-results
+
+      - name: Copy test reports
+        if: failure()
+        run: cp -r reports/* test-results/
+
+      - name: Upload test reports
+        if: failure()
         uses: actions/upload-artifact@v2
         with:
           name: test-results
