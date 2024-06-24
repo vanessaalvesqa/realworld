@@ -20,7 +20,7 @@ jobs:
 
       - name: Run tests
         run: npm test
-        continue-on-error: true
+        continue-on-error: true  # Ensure the next step runs even if tests fail
 
       - name: Create Issue on Test Failure
         if: failure()
