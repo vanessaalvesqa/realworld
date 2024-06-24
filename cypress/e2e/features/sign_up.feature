@@ -5,4 +5,4 @@ Feature: User Sign Up
     When I enter a random user into the fields
     When I click the sign up button
     Then I should be redirected to the home page
-    Then I should be logged in
+    Then I should see my username displayed
