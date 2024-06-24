@@ -1,0 +1,50 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Create Issue on Test Failure
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { getOctokit, context } = require('@actions/github');
+            const octokit = getOctokit(process.env.GITHUB_TOKEN);
+            const issueTitle = 'CI Test Failure';
+            const issueBody = `
+              ## CI Test Failure Report
+              The CI run for commit ${context.sha} failed.
+              **Branch:** ${context.ref}
+              **Workflow:** ${context.workflow}
+              **Job:** ${context.job}
+              **Run Number:** ${context.runNumber}
+              **Run ID:** ${context.runId}
+              
+              Check the [Actions tab](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}) for more details.
+            `;
+
+            await octokit.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: issueTitle,
+              body: issueBody,
+            });
