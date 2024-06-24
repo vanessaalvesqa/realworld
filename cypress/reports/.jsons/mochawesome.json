@@ -5,9 +5,9 @@
     "passes": 1,
     "pending": 0,
     "failures": 0,
-    "start": "2024-06-24T16:11:33.270Z",
-    "end": "2024-06-24T16:11:40.926Z",
-    "duration": 7656,
+    "start": "2024-06-24T16:49:41.838Z",
+    "end": "2024-06-24T16:49:53.120Z",
+    "duration": 11282,
     "testsRegistered": 1,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "57d92f1a-9faa-4078-8d30-fb421132e9ae",
+      "uuid": "461593b1-a917-4944-b8bd-97a2b838a886",
       "title": "",
       "fullFile": "cypress\\e2e\\features\\add_comment.feature",
       "file": "cypress\\e2e\\features\\add_comment.feature",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "e565c93c-5f2f-42fe-a610-30db19415114",
+          "uuid": "afdf9498-f719-41c0-8cad-ded9de1d8774",
           "title": "Add Comment to Article",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "User successfully adds a comment to an article (example #1)",
               "fullTitle": "Add Comment to Article User successfully adds a comment to an article (example #1)",
               "timedOut": null,
-              "duration": 7595,
+              "duration": 10954,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -47,20 +47,20 @@
               "context": null,
               "code": "const state = window.testState;\nreturn cy\n  .then(() => state.onStartScenario(scenario, indexedSteps))\n  .then(() =>\n    resolveAndRunBeforeHooks.call(this, scenario.tags, state.feature.name)\n  )\n  .then(() =>\n    indexedSteps.forEach((step) =>\n      stepTest.call(this, state, step, rowData)\n    )\n  )\n  .then(() => state.onFinishScenario(scenario));",
               "err": {},
-              "uuid": "760b018a-878b-4280-a162-bb703425bd54",
-              "parentUUID": "e565c93c-5f2f-42fe-a610-30db19415114",
+              "uuid": "604f93ec-bc6b-4643-95f3-dd319ea7d8de",
+              "parentUUID": "afdf9498-f719-41c0-8cad-ded9de1d8774",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "760b018a-878b-4280-a162-bb703425bd54"
+            "604f93ec-bc6b-4643-95f3-dd319ea7d8de"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 7595,
+          "duration": 10954,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000

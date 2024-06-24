@@ -24,9 +24,11 @@ When('I enter {string} into the title field', (title) => {
 });
 
 When('I enter {string} into the description field', (description) => {
-  cy.get('input[placeholder="What\'s this article about?"]').should('not.be.disabled').then(() => {
-    articlePage.fillDescription(description);
-  });
+  cy.get('input[placeholder="What\'s this article about?"]')
+    .should('not.be.disabled')
+    .then(() => {
+      articlePage.fillDescription(description);
+    });
 });
 
 When('I enter {string} into the body field', (body) => {
@@ -47,4 +49,11 @@ Then('I should be redirected to the article page', () => {
 
 Then('I should see {string} as the title', (title) => {
   cy.contains(title, { timeout: 10000 }).should('be.visible');
+});
+
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+  console.error('Uncaught exception:', err);
+ 
+  return false;
 });

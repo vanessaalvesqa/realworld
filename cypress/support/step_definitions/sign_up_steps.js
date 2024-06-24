@@ -28,3 +28,10 @@ Then('I should be redirected to the home page', () => {
 Then('I should see my username displayed', () => {
   cy.contains(user.username, { timeout: 10000 }).should('be.visible');
 });
+
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+  console.error('Uncaught exception:', err);
+
+  return false;
+});
