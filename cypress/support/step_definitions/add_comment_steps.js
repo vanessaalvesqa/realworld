@@ -1,40 +1,42 @@
 import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps';
 import CommentPage from '../page_objects/commentPage';
 import SignInPage from '../page_objects/signInPage';
-import ArticlePage from '../page_objects/articlePage';
+import HomePage from '../page_objects/homePage';
 
 const commentPage = new CommentPage();
 const signInPage = new SignInPage();
-const articlePage = new ArticlePage();
+const homePage = new HomePage();
 
 Given('I am logged in', () => {
-  cy.wait(1000);
   signInPage.visit();
-  signInPage.fillEmail('testqaengineer@test.com');
+  signInPage.fillEmail('testqaengineer2@test.com');
   signInPage.fillPassword('Test@123');
   signInPage.submit();
-  cy.wait(1000);
+  cy.url({ timeout: 10000 }).should('not.include', '/login');
 });
 
-Given('I am on the article page for {string}', (title) => {
-  articlePage.visit();
-  cy.contains(title).click();
-  cy.contains(title).should('be.visible');
-  articlePage.visit();
-  cy.contains(title).click().should('be.visible');
+Given('I am on the home page', () => {
+  homePage.visit();
+  cy.url({ timeout: 10000 }).should('include', '/');
+  cy.get('.preview-link', { timeout: 10000 }).should('be.visible');
+});
+
+When('I select any article', () => {
+  homePage.selectFirstArticle();
+  cy.url({ timeout: 10000 }).should('include', '/#/articles/');
 });
 
 When('I enter {string} into the comment input field', (comment) => {
+  cy.wait(2000);
   commentPage.addComment(comment);
 });
 
 Then('I should see {string} under the article', (comment) => {
-  cy.contains(comment).should('be.visible');
+  cy.contains('.card-text', comment, { timeout: 10000 }).should('be.visible');
 });
 
 
 Cypress.on('uncaught:exception', (err, runnable) => {
   console.error('Uncaught exception:', err);
-  
   return false;
 });
