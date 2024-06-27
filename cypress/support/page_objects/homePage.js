@@ -1,26 +1,29 @@
 class HomePage {
   visit() {
     cy.visit('/');
+    cy.log('Visited the home page successfully');
   }
 
   selectFirstArticle() {
-    cy.get('.article-preview', { timeout: 10000 })
-      .first()
-      .should('be.visible')
-      .click();
-    this.clickFirstVisibleH1OnPage();
+    this.clickFirstPreviewLink();
   }
 
-  clickFirstVisibleH1OnPage() {
-    cy.get('h1', { timeout: 10000 }).each(($el, index, $list) => {
-      if ($el.is(':visible')) {
-        cy.log('H1 text:', $el.text());
-        cy.wrap($el).scrollIntoView();
-        cy.wrap($el).click({ force: true });
-        return false;
-      }
-    });
+  clickFirstPreviewLink() {
+    cy.get('.preview-link', { timeout: 10000 })
+      .should('be.visible')
+      .first()
+      .then($link => {
+        if ($link) {
+          cy.log('Found preview link:', $link.text());
+          
+          cy.wrap($link).scrollIntoView().click({ force: true });
+          cy.log('Clicked the preview link successfully');
+        } else {
+          cy.log('No preview link found');
+        }
+      });
   }
 }
 
 export default HomePage;
+
