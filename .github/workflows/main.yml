@@ -25,7 +25,7 @@ jobs:
         run: mkdir -p cypress/reports
 
       - name: Run Cypress tests
-        run: npm run cy:run --reporter junit --reporter-options "mochaFile=cypress/reports/test-results-[hash].xml"
+        run: npm run cy:run -- --headless --browser chrome --reporter junit --reporter-options "mochaFile=cypress/reports/test-results-[hash].xml"
         continue-on-error: true
 
       - name: Generate test reports directory
