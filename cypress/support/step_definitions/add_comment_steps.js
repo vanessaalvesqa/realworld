@@ -15,7 +15,7 @@ Given('I am logged in', () => {
   cy.url({ timeout: 10000 }).should('not.include', '/login');
 });
 
-Given('I am on the home page', () => {
+When('I am on the home page', () => {
   homePage.visit();
   cy.url({ timeout: 10000 }).should('include', '/');
   cy.get('.preview-link', { timeout: 10000 }).should('be.visible');

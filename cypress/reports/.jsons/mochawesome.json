@@ -2,14 +2,14 @@
   "stats": {
     "suites": 1,
     "tests": 1,
-    "passes": 0,
+    "passes": 1,
     "pending": 0,
-    "failures": 1,
-    "start": "2024-06-27T00:25:37.958Z",
-    "end": "2024-06-27T00:26:01.999Z",
-    "duration": 24041,
+    "failures": 0,
+    "start": "2024-06-27T02:16:52.300Z",
+    "end": "2024-06-27T02:17:19.819Z",
+    "duration": 27519,
     "testsRegistered": 1,
-    "passPercent": 0,
+    "passPercent": 100,
     "pendingPercent": 0,
     "other": 0,
     "hasOther": false,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "4837659b-d1bb-4134-a06f-5aa122d8df62",
+      "uuid": "946bd0bf-faf0-4427-9d97-f9bb3faeefd1",
       "title": "",
       "fullFile": "cypress\\e2e\\features\\add_comment.feature",
       "file": "cypress\\e2e\\features\\add_comment.feature",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "b85aa31d-fbee-46f6-8c89-a261ac9f0b9c",
+          "uuid": "25baff25-56e8-48f7-b9fe-4c178f5da210",
           "title": "Add Comment to Article",
           "fullFile": "",
           "file": "",
@@ -38,33 +38,29 @@
               "title": "User successfully adds a comment to an article (example #1)",
               "fullTitle": "Add Comment to Article User successfully adds a comment to an article (example #1)",
               "timedOut": null,
-              "duration": 23528,
-              "state": "failed",
-              "speed": null,
-              "pass": false,
-              "fail": true,
+              "duration": 27409,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
               "pending": false,
               "context": null,
               "code": "const state = window.testState;\nreturn cy\n  .then(() => state.onStartScenario(scenario, indexedSteps))\n  .then(() =>\n    resolveAndRunBeforeHooks.call(this, scenario.tags, state.feature.name)\n  )\n  .then(() =>\n    indexedSteps.forEach((step) =>\n      stepTest.call(this, state, step, rowData)\n    )\n  )\n  .then(() => state.onFinishScenario(scenario));",
-              "err": {
-                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `textarea[placeholder=\"Write a comment...\"]`, but never found it.",
-                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `textarea[placeholder=\"Write a comment...\"]`, but never found it.\n    at CommentPage.addComment (cypress/support/page_objects/commentPage.js:3:57)\n    at Context.eval (cypress/support/step_definitions/add_comment_steps.js:31:14)\n    at Context.resolveAndRunStepDefinition (node_modules/cypress-cucumber-preprocessor/lib/resolveStepDefinition.js:193:0)\n    at Context.eval (node_modules/cypress-cucumber-preprocessor/lib/createTestFromScenario.js:27:0)",
-                "diff": null
-              },
-              "uuid": "eb880fc1-d1db-4748-aba9-7368f3fb5985",
-              "parentUUID": "b85aa31d-fbee-46f6-8c89-a261ac9f0b9c",
+              "err": {},
+              "uuid": "c51012ce-44b2-4788-aeff-bdb1817f4c9e",
+              "parentUUID": "25baff25-56e8-48f7-b9fe-4c178f5da210",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
-          "passes": [],
-          "failures": [
-            "eb880fc1-d1db-4748-aba9-7368f3fb5985"
+          "passes": [
+            "c51012ce-44b2-4788-aeff-bdb1817f4c9e"
           ],
+          "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 23528,
+          "duration": 27409,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
