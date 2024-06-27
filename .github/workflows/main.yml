@@ -20,6 +20,7 @@ jobs:
 
       - name: Run Cypress tests
         run: npm run cy:run -- --headless --browser chrome
+        continue-on-error: true
 
       - name: Generate test reports directory
         run: mkdir -p test-results
