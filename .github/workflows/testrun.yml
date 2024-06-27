@@ -17,29 +17,31 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-
+          
+      - name: Install Cypress
+        run: npm install cypress --save-dev
+      
       - name: Install dependencies
         run: npm install
 
+      - name: Create reports directory
+        run: mkdir -p cypress/reports
+
       - name: Run Cypress tests
-        run: npm run cy:run -- --headless --browser chrome
+        run: npm run cy:run -- --headless --browser chrome --reporter junit --reporter-options "mochaFile=cypress/reports/test-results-[hash].xml"
         continue-on-error: true
-
-      - name: Generate test reports directory
-        run: mkdir -p test-results
-
-      - name: Copy test reports
-        run: cp -r reports/* test-results/ || echo "No test reports to copy"
-
-      - name: Upload test reports
-        uses: actions/upload-artifact@v2
-        with:
-          name: test-results
-          path: test-results
+        
+      - name: List test results directory
+        run: |
+         if [ -d "cypress/reports" ]; then
+          ls -la cypress/reports
+         else
+          echo "No test reports directory found."
+         fi
 
       - name: Always upload test reports
         if: always()
         uses: actions/upload-artifact@v2
         with:
           name: test-results
-          path: test-results
+          path: cypress/reports
