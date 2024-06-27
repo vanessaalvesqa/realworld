@@ -24,6 +24,9 @@ jobs:
       - name: Create reports directory
         run: mkdir -p cypress/reports
 
+      - name: Create videos directory
+        run: mkdir -p cypress/videos
+
       - name: Run Cypress tests
         run: npm run cy:run -- --headless --browser chrome --reporter junit --reporter-options "mochaFile=cypress/reports/test-results-[hash].xml"
         continue-on-error: true
@@ -34,6 +37,14 @@ jobs:
           ls -la cypress/reports
          else
           echo "No test reports directory found."
+         fi
+
+      - name: List test videos directory
+        run: |
+         if [ -d "cypress/videos" ]; then
+          ls -la cypress/videos
+         else
+          echo "No test videos directory found."
          fi
 
       - name: Always upload test reports
