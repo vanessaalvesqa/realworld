@@ -14,7 +14,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-
+          
+      - name: Install Cypress
+        run: npm install cypress --save-dev
+      
       - name: Install dependencies
         run: npm install
 
@@ -27,12 +30,6 @@ jobs:
 
       - name: Copy test reports
         run: cp -r reports/* test-results/ || echo "No test reports to copy"
-
-      - name: Upload test reports
-        uses: actions/upload-artifact@v2
-        with:
-          name: test-results
-          path: test-results
 
       - name: Always upload test reports
         if: always()
